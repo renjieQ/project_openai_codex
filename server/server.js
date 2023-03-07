@@ -10,7 +10,6 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
-let answer = '';
 
 const app = express();
 app.use(cors());
@@ -55,13 +54,13 @@ app.post('/', async (req, res) => {
         messages: [{ role: 'user', content: prompt }],
       });
       console.log(response['data']['choices'][0]['message']['content']);
-      return (answer = response['data']['choices'][0]['message']['content']);
+      return response['data']['choices'][0]['message']['content'];
     };
-    chapGPT(`${prompt}`);
+    // chapGPT(`${prompt}`);
 
     res.status(200).send({
       // bot: response.data.choices[0].text,
-      bot: answer,
+      bot: chapGPT(`${prompt}`),
     });
   } catch (error) {
     console.error(error);
