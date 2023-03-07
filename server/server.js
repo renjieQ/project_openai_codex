@@ -43,12 +43,14 @@ app.post('/', async (req, res) => {
             role: 'system',
             content: 'You are a helpful and polite assistant.',
           },
-          { role: 'user', content: `${prompt}` },
+          { role: 'user', content: prompt },
         ],
         // temperature: 0.7, // Higher values means the model will take more risks.
         // max_tokens: 4098, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
       });
       console.log(response['data']['choices'][0]['message']['content']);
+      console.log(response.data.choices[0].message);
+      console.log(response.data.choices[0].message.content);
     };
     chapGPT(`${prompt}`);
     res.status(200).send({
