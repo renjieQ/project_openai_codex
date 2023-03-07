@@ -10,6 +10,13 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
+const chapGPT = async (prompt) => {
+  const response = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: prompt }],
+  });
+  console.log(response['data']['choices'][0]['message']['content']);
+};
 
 const app = express();
 app.use(cors());
@@ -48,18 +55,10 @@ app.post('/', async (req, res) => {
     //   presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
     // });
 
-    const chapGPT = async (prompt) => {
-      const response = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
-      });
-      console.log(response['data']['choices'][0]['message']['content']);
-    };
     chapGPT(`${prompt}`);
-
     res.status(200).send({
       // bot: response.data.choices[0].text,
-      bot: chapGPT.data.choices[0].message,
+      bot: response.data.choices[0].message,
     });
   } catch (error) {
     console.error(error);
