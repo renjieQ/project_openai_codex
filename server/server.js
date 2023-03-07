@@ -48,7 +48,6 @@ app.post('/', async (req, res) => {
     //   presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
     // });
 
-    // const { Configuration, OpenAIApi } = require('openai');
     const chapGPT = async (prompt) => {
       const response = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
@@ -56,7 +55,7 @@ app.post('/', async (req, res) => {
       });
       console.log(response['data']['choices'][0]['message']['content']);
     };
-    chapGPT('what are some theories on what is one piece?');
+    chapGPT(`${prompt}`);
 
     res.status(200).send({
       // bot: response.data.choices[0].text,
@@ -68,15 +67,6 @@ app.post('/', async (req, res) => {
   }
 });
 
-// app.listen(process.env.PORT, () =>
-//   console.log(`AI server started on http://localhost:${process.env.PORT}`)
-// );
-
-const chapGPT = async (prompt) => {
-  const response = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: prompt }],
-  });
-  console.log(response['data']['choices'][0]['message']['content']);
-};
-chapGPT('what are some theories on what is one piece?');
+app.listen(process.env.PORT, () =>
+  console.log(`AI server started on http://localhost:${process.env.PORT}`)
+);
