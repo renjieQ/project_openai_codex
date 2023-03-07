@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
     //   presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
     // });
 
-    let aaa = '';
+    let aa = '';
     const chapGPT = async (prompt) => {
       const response = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
