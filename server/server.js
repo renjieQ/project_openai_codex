@@ -54,13 +54,12 @@ app.post('/', async (req, res) => {
         messages: [{ role: 'user', content: prompt }],
       });
       console.log(response['data']['choices'][0]['message']['content']);
-      return response['data']['choices'][0]['message']['content'];
     };
-    // chapGPT(`${prompt}`);
+    chapGPT(`${prompt}`);
 
     res.status(200).send({
       // bot: response.data.choices[0].text,
-      bot: chapGPT(`${prompt}`),
+      bot: chapGPT.data.choices[0].message,
     });
   } catch (error) {
     console.error(error);
