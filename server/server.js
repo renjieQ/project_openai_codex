@@ -45,7 +45,6 @@ app.post('/', async (req, res) => {
         { role: 'user', content: prompt },
       ],
       temperature: 0.7,
-      max_tokens: 4098,
     });
 
     res.status(200).send({
