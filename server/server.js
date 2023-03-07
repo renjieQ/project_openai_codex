@@ -68,6 +68,15 @@ app.post('/', async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`AI server started on http://localhost:${process.env.PORT}`)
-);
+// app.listen(process.env.PORT, () =>
+//   console.log(`AI server started on http://localhost:${process.env.PORT}`)
+// );
+
+const chapGPT = async (prompt) => {
+  const response = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: prompt }],
+  });
+  console.log(response['data']['choices'][0]['message']['content']);
+};
+chapGPT('what are some theories on what is one piece?');
