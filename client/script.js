@@ -85,7 +85,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // fetch data from server -> bot's response
-  const response = await fetch('https://35.189.146.45/chatgpt', {
+  const response = await fetch('https://13.36.160.88/chatgpt', {
     // const response = await fetch('http://localhost:5000/', {
     // const response = await fetch('https://codex-m4h6.onrender.com/', {
     method: 'POST',
